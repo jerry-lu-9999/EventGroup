@@ -7,14 +7,14 @@
 
 import UIKit
 
-class TVC: UITableViewController, UISearchBarDelegate {
+class TVC: UITableViewController{
     @IBOutlet weak var searchBar: UISearchBar!
+    
     let searchController = UISearchController(searchResultsController: nil)
     
     var eventsArr = [Event]()
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.title = "EventGroup"
         self.tableView.rowHeight = 200
@@ -31,58 +31,61 @@ class TVC: UITableViewController, UISearchBarDelegate {
                 let decoder = JSONDecoder()
                 do {
                     let response = try decoder.decode(Response.self, from: data)
-                    
                     self.eventsArr = response.events
-                    print(self.eventsArr[0].title)
+                    print(self.eventsArr.count)
                 } catch  {
                     print("in debug print")
                     debugPrint(error)
                 }
             }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
         task.resume()
+        
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return eventsArr.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("in table view cell 1")
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as? TableViewCell else{
             fatalError("expected tableViewCell")
         }
-        
+        print("in table view cell 2")
         let currEvent = self.eventsArr[indexPath.row]
+        print(currEvent)
         
-        if let url = URL(string: "https://seatgeek.com/images/performers-landscape/generic-minor-league-baseball-b73b72/677210/32398/huge.jpg") {
+        if let url = URL(string: currEvent.performers[0].image) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else { return }
-                
+
                 DispatchQueue.main.async { /// execute on main thread
                     cell.eventImage.contentMode = UIView.ContentMode.scaleAspectFit
                     cell.eventImage.image = UIImage(data: data)
                 }
             }
-            
             task.resume()
         }
         
-        cell.title.sizeToFit()
-        cell.location.sizeToFit()
+//        cell.title.sizeToFit()
+//        cell.location.sizeToFit()
         
         cell.title.text = currEvent.title
-        cell.title.adjustsFontSizeToFitWidth = true
+        //cell.title.adjustsFontSizeToFitWidth = true
         cell.location.text = currEvent.venue.extended_address
         cell.timeStamp.text = currEvent.datetime_local
+        
         return cell
     }
     
@@ -111,10 +114,3 @@ class TVC: UITableViewController, UISearchBarDelegate {
     
 
 }
-
-extension TVC: UISearchResultsUpdating {
-  func updateSearchResults(for searchController: UISearchController) {
-    // TODO
-  }
-}
-
