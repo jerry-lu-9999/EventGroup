@@ -7,13 +7,17 @@
 
 import UIKit
 
-class TVC: UITableViewController {
-
-    var eventsArr : [Event]()
+class TVC: UITableViewController, UISearchBarDelegate {
+    @IBOutlet weak var searchBar: UISearchBar!
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    var eventsArr = [Event]()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.title = "EventGroup"
+        self.tableView.rowHeight = 200
         
         let webURL = URL(string: "https://api.seatgeek.com/2/events?client_id=" + Constants.client_id)!
         let request = URLRequest(url: webURL)
@@ -26,11 +30,13 @@ class TVC: UITableViewController {
             } else if let data = data {
                 let decoder = JSONDecoder()
                 do {
-                    let singleEvent = try decoder.decode(Event.self, from: data)
-                    eventsArr.append(singleEvent)
-                    print(singleEvent.short_title)
+                    let response = try decoder.decode(Response.self, from: data)
+                    
+                    self.eventsArr = response.events
+                    print(self.eventsArr[0].title)
                 } catch  {
-                    print(error.localizedDescription)
+                    print("in debug print")
+                    debugPrint(error)
                 }
             }
         }
@@ -51,9 +57,32 @@ class TVC: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as? TableViewCell else{
+            fatalError("expected tableViewCell")
+        }
         
+        let currEvent = self.eventsArr[indexPath.row]
+        
+        if let url = URL(string: "https://seatgeek.com/images/performers-landscape/generic-minor-league-baseball-b73b72/677210/32398/huge.jpg") {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else { return }
+                
+                DispatchQueue.main.async { /// execute on main thread
+                    cell.eventImage.contentMode = UIView.ContentMode.scaleAspectFit
+                    cell.eventImage.image = UIImage(data: data)
+                }
+            }
+            
+            task.resume()
+        }
+        
+        cell.title.sizeToFit()
+        cell.location.sizeToFit()
+        
+        cell.title.text = currEvent.title
+        cell.title.adjustsFontSizeToFitWidth = true
+        cell.location.text = currEvent.venue.extended_address
+        cell.timeStamp.text = currEvent.datetime_local
         return cell
     }
     
@@ -82,3 +111,10 @@ class TVC: UITableViewController {
     
 
 }
+
+extension TVC: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    // TODO
+  }
+}
+
