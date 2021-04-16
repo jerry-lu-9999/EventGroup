@@ -135,16 +135,30 @@
                             <constraint firstItem="U2r-PV-A4S" firstAttribute="leading" secondItem="ojk-m4-pZS" secondAttribute="leading" constant="37" id="okb-i2-XfQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="oAe-Ml-dtQ"/>
+                    <navigationItem key="navigationItem" id="oAe-Ml-dtQ">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="FZS-Mq-7Mk">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sL0-P6-cOE">
+                                <rect key="frame" x="353" y="11" width="21" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" image="heart" catalog="system"/>
+                                <connections>
+                                    <action selector="onTapLike:" destination="RaW-Fu-PPo" eventType="touchUpInside" id="vfc-wb-rlf"/>
+                                </connections>
+                            </button>
+                            <color key="tintColor" systemColor="systemRedColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="eventImage" destination="pc6-7a-56P" id="AoW-ap-rHR"/>
+                        <outlet property="likeButton" destination="FZS-Mq-7Mk" id="vLA-27-SMo"/>
                         <outlet property="location" destination="XgU-CL-L0d" id="AeG-if-y40"/>
                         <outlet property="timeStamp" destination="U2r-PV-A4S" id="VyK-f8-rfw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWn-xQ-LCQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1445" y="79"/>
+            <point key="canvasLocation" x="1377" y="79"/>
         </scene>
         <!--EventGroup-->
         <scene sceneID="1PY-7f-ywM">
