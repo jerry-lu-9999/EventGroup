@@ -13,7 +13,9 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
-    @IBOutlet weak var liked: UIImageView!
+    @IBOutlet weak var likeButton: UIButton!
+    
+    var liked = false
     
     
     override func awakeFromNib() {
@@ -27,5 +29,14 @@ class TableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func onTapLike(_ sender: Any) {
+        if liked {
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            
+        } else{
+            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        liked = !liked
+    }
     
 }

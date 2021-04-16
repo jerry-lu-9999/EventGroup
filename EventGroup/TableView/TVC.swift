@@ -28,17 +28,11 @@ class TVC: UITableViewController{
         
         getDataFromURL()
         
-        // 1
         searchController.searchResultsUpdater = self
-        // 2
         searchController.obscuresBackgroundDuringPresentation = false
-        // 3
         searchController.searchBar.placeholder = "Search Events"
-        // 4
         navigationItem.searchController = searchController
-        // 5
         definesPresentationContext = true
-
     }
 
     // MARK: - Table view data source
@@ -111,16 +105,23 @@ class TVC: UITableViewController{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? detailVC{
-//
-//        }
+        let currEvent : Event
+        
+        if isFiltering {
+            currEvent = filteredEvents[(tableView.indexPathForSelectedRow?.row)!]
+        } else{
+            currEvent = eventsArr[(tableView.indexPathForSelectedRow?.row)!]
+        }
+        
+        if let destination = segue.destination as? detailVC{
+            destination.details = currEvent
+        }
     }
     
     func filterContentForSearchText(_ searchText: String) {
       filteredEvents = eventsArr.filter { (event: Event) -> Bool in
         return event.title.lowercased().contains(searchText.lowercased())
       }
-      
       tableView.reloadData()
     }
 

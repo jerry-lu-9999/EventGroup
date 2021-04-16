@@ -9,6 +9,12 @@ import UIKit
 
 class detailVC: UIViewController {
 
+    @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var timeStamp: UILabel!
+    @IBOutlet weak var location: UILabel!
+    
+    var details : Event!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
