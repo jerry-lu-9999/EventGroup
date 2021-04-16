@@ -8,42 +8,37 @@
 import UIKit
 
 class TVC: UITableViewController{
-    @IBOutlet weak var searchBar: UISearchBar!
     
+    //you’re telling the search controller that you want to use the same view you’re searching to display the results
     let searchController = UISearchController(searchResultsController: nil)
     
     var eventsArr = [Event]()
-    
+    var filteredEvents: [Event] = []
+    var isSearchBarEmpty : Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering : Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "EventGroup"
         self.tableView.rowHeight = 200
         
-        let webURL = URL(string: "https://api.seatgeek.com/2/events?client_id=" + Constants.client_id)!
-        let request = URLRequest(url: webURL)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        getDataFromURL()
         
-        let task = session.dataTask(with: request){(data, response, error) in
-            
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let data = data {
-                let decoder = JSONDecoder()
-                do {
-                    let response = try decoder.decode(Response.self, from: data)
-                    self.eventsArr = response.events
-                    print(self.eventsArr.count)
-                } catch  {
-                    print("in debug print")
-                    debugPrint(error)
-                }
-            }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        task.resume()
-        
+        // 1
+        searchController.searchResultsUpdater = self
+        // 2
+        searchController.obscuresBackgroundDuringPresentation = false
+        // 3
+        searchController.searchBar.placeholder = "Search Events"
+        // 4
+        navigationItem.searchController = searchController
+        // 5
+        definesPresentationContext = true
+
     }
 
     // MARK: - Table view data source
@@ -53,18 +48,27 @@ class TVC: UITableViewController{
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return eventsArr.count
+      if isFiltering {
+        return filteredEvents.count
+      }
+        
+      return eventsArr.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("in table view cell 1")
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as? TableViewCell else{
             fatalError("expected tableViewCell")
         }
-        print("in table view cell 2")
-        let currEvent = self.eventsArr[indexPath.row]
-        print(currEvent)
+        
+        let currEvent : Event
+        
+        if isFiltering {
+            currEvent = filteredEvents[indexPath.row]
+        }else{
+            currEvent = eventsArr[indexPath.row]
+        }
         
         if let url = URL(string: currEvent.performers[0].image) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -78,11 +82,11 @@ class TVC: UITableViewController{
             task.resume()
         }
         
-//        cell.title.sizeToFit()
-//        cell.location.sizeToFit()
+        cell.title.sizeToFit()
+        cell.location.sizeToFit()
+        cell.title.adjustsFontSizeToFitWidth = true
         
         cell.title.text = currEvent.title
-        //cell.title.adjustsFontSizeToFitWidth = true
         cell.location.text = currEvent.venue.extended_address
         cell.timeStamp.text = currEvent.datetime_local
         
@@ -112,5 +116,45 @@ class TVC: UITableViewController{
 //        }
     }
     
+    func filterContentForSearchText(_ searchText: String) {
+      filteredEvents = eventsArr.filter { (event: Event) -> Bool in
+        return event.title.lowercased().contains(searchText.lowercased())
+      }
+      
+      tableView.reloadData()
+    }
 
+    private func getDataFromURL(){
+        let webURL = URL(string: "https://api.seatgeek.com/2/events?client_id=" + Constants.client_id)!
+        let request = URLRequest(url: webURL)
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        
+        let task = session.dataTask(with: request){(data, response, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let response = try decoder.decode(Response.self, from: data)
+                    self.eventsArr = response.events
+                } catch  {
+                    print("in debug print")
+                    debugPrint(error)
+                }
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        task.resume()
+    }
+
+}
+
+extension TVC: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    let searchBar = searchController.searchBar
+    filterContentForSearchText(searchBar.text!)
+  }
 }
