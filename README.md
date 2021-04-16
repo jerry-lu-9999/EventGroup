@@ -24,5 +24,13 @@ The app also uses Core Data to persist between app launches.
 This project is built in Xcode 12.4
 Deployment target : iOS 12.1
 
+## Current Issues
 
+The current build will pop up error message
+
+'''
+EventGroup[21343:1321333] [] nw_protocol_get_quic_image_block_invoke dlopen libquic failed
+'''
+
+I suspect it is a error when getting an image from URL in "TVC.swift"
 
