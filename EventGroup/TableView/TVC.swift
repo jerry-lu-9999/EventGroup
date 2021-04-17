@@ -104,7 +104,7 @@ class TVC: UITableViewController{
     }
     
     
-    //MARK: - Navigation
+    //MARK: - Segue into detailVC
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -123,9 +123,11 @@ class TVC: UITableViewController{
         
         if let destination = segue.destination as? detailVC{
             destination.details = currEvent
+            
         }
     }
     
+    // MARK: -Search Bar Method
     func filterContentForSearchText(_ searchText: String) {
       filteredEvents = eventsArr.filter { (event: Event) -> Bool in
         return event.title.lowercased().contains(searchText.lowercased())

@@ -15,9 +15,12 @@ class detailVC: UIViewController {
     @IBOutlet weak var likeButton: UIBarButtonItem!
     
     var details : Event!
+    var liked : Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
         
         let label = UILabel()
         label.backgroundColor = .clear
@@ -28,8 +31,22 @@ class detailVC: UIViewController {
         label.text = details.title
         self.navigationItem.titleView = label
         
-        view.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
+        if let url = URL(string: details.performers[0].image) {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else { return }
+
+                DispatchQueue.main.async { /// execute on main thread
+                    self.eventImage.contentMode = UIView.ContentMode.scaleAspectFit
+                    self.eventImage.image = UIImage(data: data)
+                }
+            }
+            task.resume()
+        }
         
+        let time = details.datetime_local.split(separator: "T")
+        timeStamp.text = time[0] + " " + time[1]
+        
+        location.text = details.venue.extended_address
     }
     
     @IBAction func onTapLike(_ sender: Any) {
