@@ -19,6 +19,11 @@ We also have a UISearchController in code embedded in TableViewController (TVC),
 
 The app also uses Core Data to persist between app launches. 
 
+## Animation
+
+When you scroll down, the table view cells will appear gradually
+
+
 ## Build and Deployment target
 
 This project is built in Xcode 12.4

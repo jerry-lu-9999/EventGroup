@@ -25,14 +25,18 @@ class TVC: UITableViewController{
         super.viewDidLoad()
         self.title = "EventGroup"
         self.tableView.rowHeight = 200
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
         
         getDataFromURL()
         
+        //searchBar setup
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Events"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        view.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
     }
 
     // MARK: - Table view data source
@@ -42,11 +46,10 @@ class TVC: UITableViewController{
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      if isFiltering {
-        return filteredEvents.count
-      }
-        
-      return eventsArr.count
+          if isFiltering {
+            return filteredEvents.count
+          }
+          return eventsArr.count
     }
 
     
@@ -76,13 +79,18 @@ class TVC: UITableViewController{
             task.resume()
         }
         
+        cell.title.adjustsFontSizeToFitWidth = true
+        cell.location.adjustsFontSizeToFitWidth = true
+        cell.timeStamp.adjustsFontSizeToFitWidth = true
+        
         cell.title.sizeToFit()
         cell.location.sizeToFit()
-        cell.title.adjustsFontSizeToFitWidth = true
         
         cell.title.text = currEvent.title
         cell.location.text = currEvent.venue.extended_address
-        cell.timeStamp.text = currEvent.datetime_local
+        
+        let time = currEvent.datetime_local.split(separator: "T")
+        cell.timeStamp.text = time[0] + " " + time[1]
         
         return cell
     }

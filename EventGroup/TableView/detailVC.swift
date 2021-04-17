@@ -18,9 +18,18 @@ class detailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = details.title
         
-        // Do any additional setup after loading the view.
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.numberOfLines = 2
+        label.font = UIFont.boldSystemFont(ofSize: 16.0)
+        label.textAlignment = .center
+        label.textColor = .black
+        label.text = details.title
+        self.navigationItem.titleView = label
+        
+        view.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
+        
     }
     
     @IBAction func onTapLike(_ sender: Any) {

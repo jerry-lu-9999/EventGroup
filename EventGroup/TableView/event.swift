@@ -13,6 +13,7 @@ struct Response : Codable{
 
 struct Event: Codable{
 
+    var id : Int
     var title : String
     var venue : Venue
     var datetime_local : String
