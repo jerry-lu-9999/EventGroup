@@ -15,7 +15,7 @@ class detailVC: UIViewController {
     @IBOutlet weak var likeButton: UIBarButtonItem!
     
     var details : Event!
-    var liked : Bool!
+//    var liked : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class detailVC: UIViewController {
         label.text = details.title
         self.navigationItem.titleView = label
         
-        if let url = URL(string: details.performers[0].image) {
+        if let url = URL(string: details.performers![0].image!) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else { return }
 
@@ -43,10 +43,10 @@ class detailVC: UIViewController {
             task.resume()
         }
         
-        let time = details.datetime_local.split(separator: "T")
+        let time = details.datetime_local!.split(separator: "T")
         timeStamp.text = time[0] + " " + time[1]
         
-        location.text = details.venue.extended_address
+        location.text = details.venue!.extended_address
     }
     
     @IBAction func onTapLike(_ sender: Any) {

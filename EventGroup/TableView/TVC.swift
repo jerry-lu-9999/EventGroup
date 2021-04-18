@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import CoreData
 
 class TVC: UITableViewController{
     
-    //you’re telling the search controller that you want to use the same view you’re searching to display the results
+    var container : NSPersistentContainer!
+    var eventsArr = [NSManagedObject]()
+    
+    //telling the search controller that I want to use the same view I'm searching to display the results
     let searchController = UISearchController(searchResultsController: nil)
     
-    var eventsArr = [Event]()
     var filteredEvents: [Event] = []
     var isSearchBarEmpty : Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -27,10 +30,17 @@ class TVC: UITableViewController{
         self.tableView.rowHeight = 200
         self.navigationController?.navigationBar.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
         
+        container = NSPersistentContainer(name: "Model")
+        container.loadPersistentStores{ storeDescription, error in
+                                        self.container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            if let error = error {
+                print("Unresolved error \(error)")
+            }
+        }
         getDataFromURL()
-        
+        loadSavedData()
         //searchBar setup
-        searchController.searchResultsUpdater = self
+        //searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Events"
         navigationItem.searchController = searchController
@@ -64,10 +74,10 @@ class TVC: UITableViewController{
         if isFiltering {
             currEvent = filteredEvents[indexPath.row]
         }else{
-            currEvent = eventsArr[indexPath.row]
+            currEvent = eventsArr[indexPath.row] as! Event
         }
         
-        if let url = URL(string: currEvent.performers[0].image) {
+        if let url = URL(string: currEvent.performers![0].image!) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else { return }
 
@@ -87,9 +97,9 @@ class TVC: UITableViewController{
         cell.location.sizeToFit()
         
         cell.title.text = currEvent.title
-        cell.location.text = currEvent.venue.extended_address
+        cell.location.text = currEvent.venue!.extended_address
         
-        let time = currEvent.datetime_local.split(separator: "T")
+        let time = currEvent.datetime_local!.split(separator: "T")
         cell.timeStamp.text = time[0] + " " + time[1]
         
         return cell
@@ -118,7 +128,7 @@ class TVC: UITableViewController{
         if isFiltering {
             currEvent = filteredEvents[(tableView.indexPathForSelectedRow?.row)!]
         } else{
-            currEvent = eventsArr[(tableView.indexPathForSelectedRow?.row)!]
+            currEvent = eventsArr[(tableView.indexPathForSelectedRow?.row)!] as! Event
         }
         
         if let destination = segue.destination as? detailVC{
@@ -128,13 +138,14 @@ class TVC: UITableViewController{
     }
     
     // MARK: -Search Bar Method
-    func filterContentForSearchText(_ searchText: String) {
-      filteredEvents = eventsArr.filter { (event: Event) -> Bool in
-        return event.title.lowercased().contains(searchText.lowercased())
-      }
-      tableView.reloadData()
-    }
+//    func filterContentForSearchText(_ searchText: String) {
+//      filteredEvents = eventsArr.filter { (event: Event) -> Bool in
+//        return event.title.lowercased().contains(searchText.lowercased())
+//      }
+//      tableView.reloadData()
+//    }
 
+    // MARK: -Core Data and Codable
     private func getDataFromURL(){
         let webURL = URL(string: "https://api.seatgeek.com/2/events?client_id=" + Constants.client_id)!
         let request = URLRequest(url: webURL)
@@ -147,25 +158,52 @@ class TVC: UITableViewController{
             } else if let data = data {
                 let decoder = JSONDecoder()
                 do {
+                    decoder.userInfo[CodingUserInfoKey.context!] = self.container.viewContext
                     let response = try decoder.decode(Response.self, from: data)
-                    self.eventsArr = response.events
+                    print("Received \(response.events!.count) events")
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else {return}
+                        self.saveContext()
+                        self.tableView.reloadData()
+                    }
+                    
                 } catch  {
                     print("in debug print")
                     debugPrint(error)
                 }
             }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         }
         task.resume()
     }
 
+    private func saveContext(){
+        if container.viewContext.hasChanges{
+            do{
+                print("saved")
+                try container.viewContext.save()
+            } catch {
+                print("error occured while saving : \(error)")
+            }
+        }
+    }
+    
+    private func loadSavedData(){
+        let request : NSFetchRequest<Event> = Event.fetchRequest()
+        
+        do{
+            eventsArr = try container.viewContext.fetch(request)
+            print("Got \(eventsArr.count) events")
+            tableView.reloadData()
+        } catch{
+            print("fetch failed")
+        }
+    }
 }
 
-extension TVC: UISearchResultsUpdating {
-  func updateSearchResults(for searchController: UISearchController) {
-    let searchBar = searchController.searchBar
-    filterContentForSearchText(searchBar.text!)
-  }
-}
+//extension TVC: UISearchResultsUpdating {
+//  func updateSearchResults(for searchController: UISearchController) {
+//    let searchBar = searchController.searchBar
+//    filterContentForSearchText(searchBar.text!)
+//  }
+//}

@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20E5231a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Event" representedClassName="Event" syncable="YES" codeGenerationType="class">
+    <entity name="Event" representedClassName=".Event" syncable="YES">
         <attribute name="datetime_local" optional="YES" attributeType="String"/>
-        <attribute name="extended_address" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="liked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="performers" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName=".[Performer]"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="venue" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName=".Venue"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Performer" inverseName="newRelationship" inverseEntity="Performer"/>
+        <relationship name="newRelationship1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Venue" inverseName="newRelationship" inverseEntity="Venue"/>
+        <relationship name="newRelationship2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Response" inverseName="newRelationship" inverseEntity="Response"/>
+    </entity>
+    <entity name="Performer" representedClassName=".Performer" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="newRelationship" inverseEntity="Event"/>
+    </entity>
+    <entity name="Response" representedClassName="Response" syncable="YES">
+        <attribute name="events" optional="YES" attributeType="Transformable" valueTransformerName="NSUnarchiveFromData" customClassName=".[Event]"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="newRelationship2" inverseEntity="Event"/>
+    </entity>
+    <entity name="Venue" representedClassName=".Venue" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="extended_address" optional="YES" attributeType="String"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="newRelationship1" inverseEntity="Event"/>
     </entity>
     <elements>
-        <element name="Event" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Event" positionX="-271.1266479492188" positionY="-32.04412841796875" width="128" height="178"/>
+        <element name="Performer" positionX="15.45361328125" positionY="96.954833984375" width="128" height="73"/>
+        <element name="Response" positionX="-422.4367065429688" positionY="-92.90223693847656" width="128" height="73"/>
+        <element name="Venue" positionX="-99.45928955078125" positionY="-97.99371337890625" width="128" height="88"/>
     </elements>
 </model>
