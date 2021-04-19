@@ -48,3 +48,6 @@ EventGroup[21343:1321333] [] nw_protocol_get_quic_image_block_invoke dlopen libq
 
 I suspect it is a error when getting an image from URL in "TVC.swift"
 
+## Conclusion
+
+It has been an amazing coding challenge and an awesome learning opportunity. There are still a lot of areas that I'm not familiar with, but I'm catching up to my best ability!
