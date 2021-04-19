@@ -17,7 +17,6 @@
 		F50ED1662620BC0F00799409 /* EventGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50ED1652620BC0F00799409 /* EventGroupTests.swift */; };
 		F50ED1712620BC0F00799409 /* EventGroupUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50ED1702620BC0F00799409 /* EventGroupUITests.swift */; };
 		F511C1702629CBFE00889907 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F511C16F2629CBFE00889907 /* README.md */; };
-		F511C176262A27AB00889907 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F511C174262A27AB00889907 /* Model.xcdatamodeld */; };
 		F59A6E042620E43500099F3C /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A6E032620E43500099F3C /* TableViewCell.swift */; };
 		F59A6E0A2620E46600099F3C /* TVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A6E092620E46600099F3C /* TVC.swift */; };
 		F59A6E122621213100099F3C /* detailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A6E112621213100099F3C /* detailVC.swift */; };
@@ -59,7 +58,6 @@
 		F50ED1702620BC0F00799409 /* EventGroupUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventGroupUITests.swift; sourceTree = "<group>"; };
 		F50ED1722620BC0F00799409 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F511C16F2629CBFE00889907 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F511C175262A27AB00889907 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		F59A6E032620E43500099F3C /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		F59A6E092620E46600099F3C /* TVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVC.swift; sourceTree = "<group>"; };
 		F59A6E112621213100099F3C /* detailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailVC.swift; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 				F59A6E082620E44300099F3C /* TableView */,
 				F50ED1572620BC0E00799409 /* Assets.xcassets */,
 				F50ED1592620BC0E00799409 /* LaunchScreen.storyboard */,
-				F511C174262A27AB00889907 /* Model.xcdatamodeld */,
 				F50ED15C2620BC0E00799409 /* Info.plist */,
 			);
 			path = EventGroup;
@@ -297,7 +294,6 @@
 				F59A6E042620E43500099F3C /* TableViewCell.swift in Sources */,
 				F50ED14F2620BC0B00799409 /* AppDelegate.swift in Sources */,
 				F59A6E122621213100099F3C /* detailVC.swift in Sources */,
-				F511C176262A27AB00889907 /* Model.xcdatamodeld in Sources */,
 				F59A6E17262121FA00099F3C /* Constants.swift in Sources */,
 				F59A6E0A2620E46600099F3C /* TVC.swift in Sources */,
 				F50ED1512620BC0B00799409 /* SceneDelegate.swift in Sources */,
@@ -635,19 +631,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		F511C174262A27AB00889907 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				F511C175262A27AB00889907 /* Model.xcdatamodel */,
-			);
-			currentVersion = F511C175262A27AB00889907 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = F50ED1432620BC0B00799409 /* Project object */;
 }

@@ -15,7 +15,7 @@ class detailVC: UIViewController {
     @IBOutlet weak var likeButton: UIBarButtonItem!
     
     var details : Event!
-    var liked : Bool!
+    var liked : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,12 @@ class detailVC: UIViewController {
     }
     
     @IBAction func onTapLike(_ sender: Any) {
-        
+        if liked {
+            likeButton.image = UIImage(systemName: "heart")
+        } else{
+            likeButton.image = UIImage(systemName: "heart.fill")
+        }
+        liked = !liked
     }
     
 }
