@@ -17,17 +17,26 @@ There are three main controllers.
 
 We also have a UISearchController in code embedded in TableViewController (TVC), it gives us the searchBar on the top of the tableView cells. 
 
-The app also uses Core Data to persist between app launches. 
+The app also uses Core Data to persist between app launches, and Codable to decode JSON file.
 
 ## Animation
 
 When you scroll down, the table view cells will appear gradually
 
-
 ## Build and Deployment target
 
 This project is built in Xcode 12.4
-Deployment target : iOS 13.0
+
+Deployment target : iOS 12.1 (By implementing  @available(iOS 13.0, *) to AppDelegate and SceneDelegate)
+
+## Branches
+
+Main:           The branch that I'm currently working on. This branch has incorporated CoreData model, but I've met a lot of difficulties when using CoreData and Codable together. For example, when setting event entity to be transformable, I met issue with NSSecureCoding because I use NSSecureUnarchieveFromData transformer, an area that I'm not familiar with
+
+Production: Fully runnable. However, it does not have persistance across app launches. 
+
+**NOTE**: When testing, please use production branch. I will continue to debug and push to the main branch.  
+
 
 ## Current Issues
 
