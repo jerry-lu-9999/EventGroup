@@ -9,13 +9,12 @@ import UIKit
 
 class detailVC: UIViewController {
 
+    var details : Event!
+    
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var likeButton: UIBarButtonItem!
-    
-    var details : Event!
-    var liked : Bool = false
+    @IBOutlet var likeButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,15 +46,17 @@ class detailVC: UIViewController {
         timeStamp.text = time[0] + " " + time[1]
         
         location.text = details.extended_address
+        
+
+        
     }
     
-    @IBAction func onTapLike(_ sender: Any) {
-        if liked {
-            likeButton.image = UIImage(systemName: "heart")
-        } else{
-            likeButton.image = UIImage(systemName: "heart.fill")
-        }
-        liked = !liked
+    @objc func tapToUnlike(_sender: UIButton){
+        
+    }
+    
+    @objc func tapToLike(_sender: UIButton){
+        
     }
     
 }

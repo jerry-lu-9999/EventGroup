@@ -96,11 +96,44 @@ class TVC: UITableViewController{
 
         cell.title.text = currEvent.title
         cell.location.text = currEvent.extended_address
-
         let time = currEvent.datetime_local!.split(separator: "T")
         cell.timeStamp.text = time[0] + " " + time[1]
         
+        if currEvent.liked {
+            cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else{
+            cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        cell.likeButton.addTarget(self, action: #selector(handleRegister(_:)), for: .touchUpInside)
+        
         return cell
+    }
+    
+    @objc func handleRegister(_ sender: UIButton){
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
+        let indexPath: IndexPath? = self.tableView.indexPathForRow(at: buttonPosition)
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as? TableViewCell else{
+            fatalError("expected tableViewCell")
+        }
+        
+        let eventFromArr = eventsArr[indexPath!.row]
+        let id = eventFromArr.id
+        let event = realm.object(ofType: Event.self, forPrimaryKey: id)
+        
+        if !event!.liked {
+            cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            
+            try! realm.write{
+                event!.liked = true
+            }
+        } else{
+            cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            
+            try! realm.write{
+                event!.liked = false
+            }
+        }
     }
     
     // MARK: - Table View Animation
@@ -143,7 +176,7 @@ class TVC: UITableViewController{
       tableView.reloadData()
     }
 
-    
+    //MARK: -Get data from URL
     private func getDataFromURL(){
         let webURL = URL(string: "https://api.seatgeek.com/2/events?client_id=" + Constants.client_id)!
         let request = URLRequest(url: webURL)
@@ -160,6 +193,13 @@ class TVC: UITableViewController{
                 for i in 0..<arrOfEvents.count {
                     let event = Event()
                     let curr = arrOfEvents[i]
+                    let id = curr["id"].intValue
+                    
+                    let eventTobeSearched = self.realm.object(ofType: Event.self, forPrimaryKey: id)
+                    if eventTobeSearched != nil {
+                        self.eventsArr.append(eventTobeSearched!)
+                        continue
+                    }
                     
                     event.id = curr["id"].intValue
                     event.title = curr["title"].stringValue
@@ -168,7 +208,7 @@ class TVC: UITableViewController{
                     event.imageURL = curr["performers"][0]["image"].stringValue
                     
                     try! self.realm.write{
-                        self.realm.add(event, update: .modified)
+                        self.realm.add(event)
                     }
                     
                     self.eventsArr.append(event)

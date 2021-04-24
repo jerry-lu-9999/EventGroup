@@ -55,9 +55,6 @@
                                             <rect key="frame" x="20" y="167" width="20.666666666666671" height="22"/>
                                             <color key="tintColor" systemColor="systemRedColor"/>
                                             <state key="normal" image="heart" catalog="system"/>
-                                            <connections>
-                                                <action selector="onTapLike:" destination="9M5-9c-d3i" eventType="touchUpInside" id="paK-Lg-3n0"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -124,7 +121,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgU-CL-L0d">
-                                <rect key="frame" x="16" y="448" width="358" height="20"/>
+                                <rect key="frame" x="16" y="447.66666666666669" width="358" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -145,22 +142,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oAe-Ml-dtQ">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="FZS-Mq-7Mk">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sL0-P6-cOE">
-                                <rect key="frame" x="353" y="11" width="21" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemRedColor"/>
-                                <state key="normal" image="heart" catalog="system"/>
-                                <connections>
-                                    <action selector="onTapLike:" destination="RaW-Fu-PPo" eventType="touchUpInside" id="vfc-wb-rlf"/>
-                                </connections>
-                            </button>
-                            <color key="tintColor" systemColor="systemRedColor"/>
-                        </barButtonItem>
+                        <nil key="title"/>
                     </navigationItem>
                     <connections>
                         <outlet property="eventImage" destination="pc6-7a-56P" id="AoW-ap-rHR"/>
-                        <outlet property="likeButton" destination="FZS-Mq-7Mk" id="vLA-27-SMo"/>
                         <outlet property="location" destination="XgU-CL-L0d" id="AeG-if-y40"/>
                         <outlet property="timeStamp" destination="U2r-PV-A4S" id="VyK-f8-rfw"/>
                     </connections>
