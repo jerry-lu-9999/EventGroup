@@ -24,6 +24,7 @@
 		F59A6E122621213100099F3C /* detailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A6E112621213100099F3C /* detailVC.swift */; };
 		F59A6E17262121FA00099F3C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A6E16262121FA00099F3C /* Constants.swift */; };
 		F59A6E1F262249A200099F3C /* event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A6E1E262249A200099F3C /* event.swift */; };
+		F5BCBCAE2634A69600966987 /* swift.gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F5BCBCAD2634A69600966987 /* swift.gitignore */; };
 		F66E41EF583202B790DAA1E6 /* Pods_EventGroup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E9FA6153F77D3B4E32F652 /* Pods_EventGroup.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		F59A6E112621213100099F3C /* detailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailVC.swift; sourceTree = "<group>"; };
 		F59A6E16262121FA00099F3C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F59A6E1E262249A200099F3C /* event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event.swift; sourceTree = "<group>"; };
+		F5BCBCAD2634A69600966987 /* swift.gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = swift.gitignore; sourceTree = "<group>"; };
 		F9A5DEC32343A2246525E54A /* Pods-EventGroup-EventGroupUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventGroup-EventGroupUITests.debug.xcconfig"; path = "Target Support Files/Pods-EventGroup-EventGroupUITests/Pods-EventGroup-EventGroupUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +133,7 @@
 		F50ED1422620BC0B00799409 = {
 			isa = PBXGroup;
 			children = (
+				F5BCBCAD2634A69600966987 /* swift.gitignore */,
 				F511C16F2629CBFE00889907 /* README.md */,
 				F50ED14D2620BC0B00799409 /* EventGroup */,
 				F50ED1642620BC0F00799409 /* EventGroupTests */,
@@ -307,6 +310,7 @@
 			files = (
 				F50ED15B2620BC0E00799409 /* LaunchScreen.storyboard in Resources */,
 				F50ED1582620BC0E00799409 /* Assets.xcassets in Resources */,
+				F5BCBCAE2634A69600966987 /* swift.gitignore in Resources */,
 				F511C1702629CBFE00889907 /* README.md in Resources */,
 				F506DAA026265B0F00F67815 /* seatGeak.json in Resources */,
 				F50ED1562620BC0B00799409 /* Main.storyboard in Resources */,
