@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RealmSwift
+import SwiftyJSON
 
 class TVC: UITableViewController{
     
@@ -20,12 +22,18 @@ class TVC: UITableViewController{
     var isFiltering : Bool {
         return searchController.isActive && !isSearchBarEmpty
     }
-        
+    
+    lazy var realm: Realm = {
+        return try! Realm()
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "EventGroup"
         self.tableView.rowHeight = 200
         self.navigationController?.navigationBar.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
+        
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         getDataFromURL()
         
@@ -67,7 +75,7 @@ class TVC: UITableViewController{
             currEvent = eventsArr[indexPath.row]
         }
         
-        if let url = URL(string: currEvent.performers[0].image) {
+        if let url = URL(string: currEvent.imageURL!) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else { return }
 
@@ -78,18 +86,18 @@ class TVC: UITableViewController{
             }
             task.resume()
         }
-        
+
         cell.title.adjustsFontSizeToFitWidth = true
         cell.location.adjustsFontSizeToFitWidth = true
         cell.timeStamp.adjustsFontSizeToFitWidth = true
-        
+
         cell.title.sizeToFit()
         cell.location.sizeToFit()
-        
+
         cell.title.text = currEvent.title
-        cell.location.text = currEvent.venue.extended_address
-        
-        let time = currEvent.datetime_local.split(separator: "T")
+        cell.location.text = currEvent.extended_address
+
+        let time = currEvent.datetime_local!.split(separator: "T")
         cell.timeStamp.text = time[0] + " " + time[1]
         
         return cell
@@ -127,14 +135,15 @@ class TVC: UITableViewController{
         }
     }
     
-    // MARK: -Search Bar Method
+     //MARK: -Search Bar Method
     func filterContentForSearchText(_ searchText: String) {
       filteredEvents = eventsArr.filter { (event: Event) -> Bool in
-        return event.title.lowercased().contains(searchText.lowercased())
+        return event.title!.lowercased().contains(searchText.lowercased())
       }
       tableView.reloadData()
     }
 
+    
     private func getDataFromURL(){
         let webURL = URL(string: "https://api.seatgeek.com/2/events?client_id=" + Constants.client_id)!
         let request = URLRequest(url: webURL)
@@ -145,13 +154,24 @@ class TVC: UITableViewController{
             if let error = error {
                 print(error.localizedDescription)
             } else if let data = data {
-                let decoder = JSONDecoder()
-                do {
-                    let response = try decoder.decode(Response.self, from: data)
-                    self.eventsArr = response.events
-                } catch  {
-                    print("in debug print")
-                    debugPrint(error)
+                let json = try! JSON(data: data)
+                let arrOfEvents = json["events"]
+                
+                for i in 0..<arrOfEvents.count {
+                    let event = Event()
+                    let curr = arrOfEvents[i]
+                    
+                    event.id = curr["id"].intValue
+                    event.title = curr["title"].stringValue
+                    event.datetime_local = curr["datetime_local"].stringValue
+                    event.extended_address = curr["venue"]["extended_address"].stringValue
+                    event.imageURL = curr["performers"][0]["image"].stringValue
+                    
+                    try! self.realm.write{
+                        self.realm.add(event, update: .modified)
+                    }
+                    
+                    self.eventsArr.append(event)
                 }
             }
             DispatchQueue.main.async {

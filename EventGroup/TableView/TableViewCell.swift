@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TableViewCell: UITableViewCell {
 
@@ -16,7 +17,6 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     
     var liked = false
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
