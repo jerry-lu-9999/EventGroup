@@ -17,7 +17,17 @@ There are three main controllers.
 
 We also have a UISearchController in code embedded in TableViewController (TVC), it gives us the searchBar on the top of the tableView cells. 
 
-The app also uses Core Data to persist between app launches, and Codable to decode JSON file.
+## Library
+1. [SwiftyJSON](https://cocoapods.org/pods/SwiftyJSON#initialization):
+    The usual Codable protocol has proven to be rather complicated. SwiftyJSON has provided me with great visibility
+    to get me the values I want.
+
+2. [Realm](https://realm.io/):
+    This database is powerful and easy to pick up compared to CoreData. It provides me with the persistence I want across the app launches.
+    I also use Realm studio to actually look at the database itself.
+    
+**NOTE:** I use cocoapods for third-party libraries. Therefore, you would see podfile and xcworkspace file. It would also take
+longer to compile for the first time.
 
 ## Animation
 
@@ -25,9 +35,11 @@ When you scroll down, the table view cells will appear gradually
 
 ## Build and Deployment target
 
-This project is built in Xcode 12.4
+This project is built in Xcode 12.4, Tested on iPhone 12 simulator
 
 Deployment target : iOS 12.1 (By implementing  @available(iOS 13.0, *) to AppDelegate and SceneDelegate)
+
+
 
 ## Branches
 

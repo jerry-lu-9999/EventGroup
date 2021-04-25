@@ -15,8 +15,6 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var likeButton: UIButton!
-
-    var liked = false
     
     override func awakeFromNib() {
         super.awakeFromNib()

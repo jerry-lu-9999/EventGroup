@@ -60,7 +60,7 @@ class TVC: UITableViewController{
           return eventsArr.count
     }
 
-    
+    // MARK: - Main Tableview setup
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as? TableViewCell else{
@@ -121,6 +121,8 @@ class TVC: UITableViewController{
         let id = eventFromArr.id
         let event = realm.object(ofType: Event.self, forPrimaryKey: id)
         
+        print("in handle register event liked is \(event?.liked)")
+        
         if !event!.liked {
             cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             
@@ -134,6 +136,9 @@ class TVC: UITableViewController{
                 event!.liked = false
             }
         }
+        //
+        
+        tableView.reloadRows(at: [indexPath!], with: .automatic)
     }
     
     // MARK: - Table View Animation
