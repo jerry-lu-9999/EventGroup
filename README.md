@@ -35,11 +35,10 @@ When you scroll down, the table view cells will appear gradually
 
 ## Build and Deployment target
 
-This project is built in Xcode 12.4, Tested on iPhone 12 simulator
+This project is built in Xcode 12.4, 
+                       Tested on iPhone 12 simulator running iOS 14.4 and iPhone X simulator running iOS 12.1
 
-Deployment target : iOS 12.1 (By implementing  @available(iOS 13.0, *) to AppDelegate and SceneDelegate)
-
-
+Minimum Deployment Target : iOS 12.1 (By implementing  @available(iOS 13.0, *) to AppDelegate and SceneDelegate)
 
 ## Branches
 

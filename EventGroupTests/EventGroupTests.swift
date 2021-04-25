@@ -29,5 +29,13 @@ class EventGroupTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+//    func testSaveAndGetEvent() throws {
+//        do{
+//            let newEvent = 
+//        } catch{
+//            XCTAssert(false, "unexpected error \(error)")
+//        }
+//    }
 
 }

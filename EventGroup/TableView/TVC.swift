@@ -99,10 +99,13 @@ class TVC: UITableViewController{
         let time = currEvent.datetime_local!.split(separator: "T")
         cell.timeStamp.text = time[0] + " " + time[1]
         
+        cell.likeButton.contentVerticalAlignment = .fill
+        cell.likeButton.contentHorizontalAlignment = .fill
+        cell.likeButton.imageView?.contentMode = .scaleAspectFit
         if currEvent.liked {
-            cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            cell.likeButton.setImage(UIImage(named: "heart.fill"), for: .normal)
         } else{
-            cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            cell.likeButton.setImage(UIImage(named: "heart.void"), for: .normal)
         }
         cell.likeButton.addTarget(self, action: #selector(handleRegister(_:)), for: .touchUpInside)
         
@@ -121,16 +124,18 @@ class TVC: UITableViewController{
         let id = eventFromArr.id
         let event = realm.object(ofType: Event.self, forPrimaryKey: id)
         
-        print("in handle register event liked is \(event?.liked)")
-        
+        cell.likeButton.contentVerticalAlignment = .fill
+        cell.likeButton.contentHorizontalAlignment = .fill
+        cell.likeButton.imageView?.contentMode = .scaleAspectFit
         if !event!.liked {
-            cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            
+            cell.likeButton.setImage(UIImage(named: "heart.fill"), for: .normal)
+
             try! realm.write{
                 event!.liked = true
             }
         } else{
-            cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            cell.likeButton.setImage(UIImage(named: "heart.void"), for: .normal)
+
             
             try! realm.write{
                 event!.liked = false

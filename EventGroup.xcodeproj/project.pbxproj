@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		209665D0A050F2F04C79DA39 /* Pods_EventGroup_EventGroupUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F67C59A53C008685D4138B4 /* Pods_EventGroup_EventGroupUITests.framework */; };
 		8559414A825D7E0DC1DA6B72 /* Pods_EventGroupTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91DEEBCCB9E5C7B0112B5F2 /* Pods_EventGroupTests.framework */; };
-		F506DAA026265B0F00F67815 /* seatGeak.json in Resources */ = {isa = PBXBuildFile; fileRef = F506DA9F26265B0E00F67815 /* seatGeak.json */; };
 		F50ED14F2620BC0B00799409 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50ED14E2620BC0B00799409 /* AppDelegate.swift */; };
 		F50ED1512620BC0B00799409 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50ED1502620BC0B00799409 /* SceneDelegate.swift */; };
 		F50ED1532620BC0B00799409 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50ED1522620BC0B00799409 /* MainVC.swift */; };
@@ -54,7 +53,6 @@
 		D91DEEBCCB9E5C7B0112B5F2 /* Pods_EventGroupTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventGroupTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6A9A0A4680B57CC5E9FC47 /* Pods-EventGroup-EventGroupUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventGroup-EventGroupUITests.release.xcconfig"; path = "Target Support Files/Pods-EventGroup-EventGroupUITests/Pods-EventGroup-EventGroupUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EC65134BC0218BC3F700EA3E /* Pods-EventGroup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventGroup.release.xcconfig"; path = "Target Support Files/Pods-EventGroup/Pods-EventGroup.release.xcconfig"; sourceTree = "<group>"; };
-		F506DA9F26265B0E00F67815 /* seatGeak.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = seatGeak.json; sourceTree = "<group>"; };
 		F50ED14B2620BC0B00799409 /* EventGroup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventGroup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50ED14E2620BC0B00799409 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F50ED1502620BC0B00799409 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 		F50ED14D2620BC0B00799409 /* EventGroup */ = {
 			isa = PBXGroup;
 			children = (
-				F506DA9F26265B0E00F67815 /* seatGeak.json */,
 				F50ED14E2620BC0B00799409 /* AppDelegate.swift */,
 				F50ED1502620BC0B00799409 /* SceneDelegate.swift */,
 				F59A6E16262121FA00099F3C /* Constants.swift */,
@@ -312,7 +309,6 @@
 				F50ED1582620BC0E00799409 /* Assets.xcassets in Resources */,
 				F5BCBCAE2634A69600966987 /* swift.gitignore in Resources */,
 				F511C1702629CBFE00889907 /* README.md in Resources */,
-				F506DAA026265B0F00F67815 /* seatGeak.json in Resources */,
 				F50ED1562620BC0B00799409 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,7 +550,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -609,7 +605,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -628,7 +624,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9YW4H59N3;
 				INFOPLIST_FILE = EventGroup/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -649,7 +645,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9YW4H59N3;
 				INFOPLIST_FILE = EventGroup/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

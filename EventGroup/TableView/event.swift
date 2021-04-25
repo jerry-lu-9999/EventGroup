@@ -22,6 +22,14 @@ class Event: Object{
     override static func primaryKey() -> String? {
         return "id"
     }
+    
+    public func makeNewEvent(_ id: Int, title: String) -> Event {
+        let newEvent = Event()
+        newEvent.id = id
+        newEvent.title = title
+        
+        return newEvent
+    }
 }
 
 
