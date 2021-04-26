@@ -6,15 +6,21 @@
 //
 
 import UIKit
+import RealmSwift
 
 class detailVC: UIViewController {
-
+    
     var details : Event!
+    
+    weak var delegate : TVC!
+    
+    let realm = try! Realm()
     
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var location: UILabel!
-    @IBOutlet var likeButton: UIBarButtonItem!
+    @IBOutlet weak var likeButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,17 +52,30 @@ class detailVC: UIViewController {
         timeStamp.text = time[0] + " " + time[1]
         
         location.text = details.extended_address
-        
+
+        if details.liked {
+            likeButton.setImage(UIImage(named: "heart.fill"), for: .normal)
+        } else{
+            likeButton.setImage(UIImage(named: "heart.void"), for: .normal)
+        }
 
         
     }
     
-    @objc func tapToUnlike(_sender: UIButton){
-        
-    }
-    
-    @objc func tapToLike(_sender: UIButton){
-        
+    @IBAction func onTap(_ sender: Any) {
+        if !details.liked {
+            likeButton.setImage(UIImage(named: "heart.fill"), for: .normal)
+            
+            try! realm.write{
+                details!.liked = true
+            }
+        } else{
+            likeButton.setImage(UIImage(named: "heart.void"), for: .normal)
+
+            try! realm.write{
+                details!.liked = false
+            }
+        }
     }
     
 }

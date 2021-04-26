@@ -45,6 +45,12 @@ class TVC: UITableViewController{
         definesPresentationContext = true
         
         view.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -102,6 +108,7 @@ class TVC: UITableViewController{
         cell.likeButton.contentVerticalAlignment = .fill
         cell.likeButton.contentHorizontalAlignment = .fill
         cell.likeButton.imageView?.contentMode = .scaleAspectFit
+        
         if currEvent.liked {
             cell.likeButton.setImage(UIImage(named: "heart.fill"), for: .normal)
         } else{
@@ -136,7 +143,6 @@ class TVC: UITableViewController{
         } else{
             cell.likeButton.setImage(UIImage(named: "heart.void"), for: .normal)
 
-            
             try! realm.write{
                 event!.liked = false
             }
@@ -149,7 +155,7 @@ class TVC: UITableViewController{
     // MARK: - Table View Animation
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.alpha = 0
-        UIView.animate(withDuration: 0.5,
+        UIView.animate(withDuration: 0.2,
                        delay: 0.1 * Double(indexPath.row),
                        animations: {cell.alpha = 1})
     }
@@ -174,7 +180,6 @@ class TVC: UITableViewController{
         
         if let destination = segue.destination as? detailVC{
             destination.details = currEvent
-            
         }
     }
     

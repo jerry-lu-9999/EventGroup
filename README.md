@@ -42,11 +42,15 @@ Minimum Deployment Target : iOS 12.1 (By implementing  @available(iOS 13.0, *) t
 
 ## Branches
 
-Main:           The branch that I'm currently working on. This branch has incorporated CoreData model, but I've met a lot of difficulties when using CoreData and Codable together. For example, when setting event entity to be transformable, I met issue with NSSecureCoding because I use NSSecureUnarchieveFromData transformer, an area that I'm not familiar with
+Main:           The branch that I'm currently working on. 
 
-Production: Fully runnable. However, it does not have persistance across app launches. 
+Production: Fully runnable and up to requirement
 
-**NOTE**: When testing, please use production branch. I will continue to debug and push to the main branch.  
+**NOTE**: When testing, please use production branch.
+
+## How to run
+
+Simpily clone the repo from Github. All the pods should be there. Run the **xcworkspace** instead of **xcproj** since I'm using Cocoapods. 
 
 
 ## Current Issues

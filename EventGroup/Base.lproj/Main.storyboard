@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gJz-mD-iIt">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -126,6 +127,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rc-pS-cFF">
+                                <rect key="frame" x="352" y="337" width="22" height="22"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" image="heart.void">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTap:" destination="RaW-Fu-PPo" eventType="touchUpInside" id="ff1-4Z-glD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ojk-m4-pZS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -134,8 +145,11 @@
                             <constraint firstItem="XgU-CL-L0d" firstAttribute="leading" secondItem="ojk-m4-pZS" secondAttribute="leading" constant="16" id="Fjj-7q-OMU"/>
                             <constraint firstItem="U2r-PV-A4S" firstAttribute="top" secondItem="pc6-7a-56P" secondAttribute="bottom" constant="32" id="HVF-XA-Stu"/>
                             <constraint firstItem="U2r-PV-A4S" firstAttribute="leading" secondItem="ojk-m4-pZS" secondAttribute="leading" constant="16" id="IAq-qP-Rri"/>
+                            <constraint firstItem="5Rc-pS-cFF" firstAttribute="top" secondItem="pc6-7a-56P" secondAttribute="bottom" constant="-15" id="IdV-jG-BKe"/>
                             <constraint firstItem="pc6-7a-56P" firstAttribute="centerX" secondItem="ojk-m4-pZS" secondAttribute="centerX" id="QD2-TG-FcT"/>
                             <constraint firstItem="pc6-7a-56P" firstAttribute="top" secondItem="ojk-m4-pZS" secondAttribute="top" id="QKK-2e-GGF"/>
+                            <constraint firstItem="5Rc-pS-cFF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ojk-m4-pZS" secondAttribute="leading" symbolic="YES" id="TdQ-4e-JhE"/>
+                            <constraint firstItem="ojk-m4-pZS" firstAttribute="trailing" secondItem="5Rc-pS-cFF" secondAttribute="trailing" constant="16" id="dWP-sd-UqU"/>
                             <constraint firstItem="XgU-CL-L0d" firstAttribute="top" secondItem="U2r-PV-A4S" secondAttribute="bottom" constant="43.666666666666686" id="emt-Ii-Tr4"/>
                             <constraint firstItem="XgU-CL-L0d" firstAttribute="centerX" secondItem="ojk-m4-pZS" secondAttribute="centerX" id="frG-Jj-ph3"/>
                             <constraint firstItem="pc6-7a-56P" firstAttribute="leading" secondItem="ojk-m4-pZS" secondAttribute="leading" constant="16" id="iZf-j3-hgO"/>
@@ -146,6 +160,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="eventImage" destination="pc6-7a-56P" id="AoW-ap-rHR"/>
+                        <outlet property="likeButton" destination="5Rc-pS-cFF" id="9k6-Nt-s1Z"/>
                         <outlet property="location" destination="XgU-CL-L0d" id="AeG-if-y40"/>
                         <outlet property="timeStamp" destination="U2r-PV-A4S" id="VyK-f8-rfw"/>
                     </connections>
@@ -178,6 +193,7 @@
     </scenes>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart.void" width="21.333333969116211" height="21.333333969116211"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
