@@ -25,16 +25,21 @@ class detailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
+        view.backgroundColor = UIColor(red: 23/255.0, green: 120/255.0, blue: 242/255.0, alpha: 1)
+        
+        
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor.black
+        self.navigationController?.navigationBar.backItem?.titleView?.tintColor = UIColor.black
         
         let label = UILabel()
         label.backgroundColor = .clear
-        label.numberOfLines = 2
-        label.font = UIFont.boldSystemFont(ofSize: 16.0)
+        label.numberOfLines = 3
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
         label.textAlignment = .center
-        label.textColor = .black
+        label.textColor = .white
         label.text = details.title
         self.navigationItem.titleView = label
+        
         
         if let url = URL(string: details.imageURL!) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -50,9 +55,11 @@ class detailVC: UIViewController {
         
         let time = details.datetime_local!.split(separator: "T")
         timeStamp.text = time[0] + " " + time[1]
+        timeStamp.textColor = .white
         
         location.text = details.extended_address
-
+        location.textColor = .white
+        
         if details.liked {
             likeButton.setImage(UIImage(named: "heart.fill"), for: .normal)
         } else{

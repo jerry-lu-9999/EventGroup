@@ -31,7 +31,7 @@ class TVC: UITableViewController{
         super.viewDidLoad()
         self.title = "EventGroup"
         self.tableView.rowHeight = 200
-        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 23/255.0, green: 120/255.0, blue: 242/255.0, alpha: 1)
         
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
@@ -41,10 +41,15 @@ class TVC: UITableViewController{
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Events"
+        if #available(iOS 13.0, *) {
+            searchController.searchBar.searchTextField.backgroundColor = .white
+        } else {
+            // Fallback on earlier versions
+        }
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        view.backgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1)
+        view.backgroundColor = UIColor(red: 23/255.0, green: 120/255.0, blue: 242/255.0, alpha: 1)
         
     }
     
@@ -155,7 +160,7 @@ class TVC: UITableViewController{
     // MARK: - Table View Animation
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.alpha = 0
-        UIView.animate(withDuration: 0.2,
+        UIView.animate(withDuration: 0.5,
                        delay: 0.1 * Double(indexPath.row),
                        animations: {cell.alpha = 1})
     }

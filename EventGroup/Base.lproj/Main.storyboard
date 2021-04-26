@@ -155,9 +155,7 @@
                             <constraint firstItem="pc6-7a-56P" firstAttribute="leading" secondItem="ojk-m4-pZS" secondAttribute="leading" constant="16" id="iZf-j3-hgO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="oAe-Ml-dtQ">
-                        <nil key="title"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="oAe-Ml-dtQ"/>
                     <connections>
                         <outlet property="eventImage" destination="pc6-7a-56P" id="AoW-ap-rHR"/>
                         <outlet property="likeButton" destination="5Rc-pS-cFF" id="9k6-Nt-s1Z"/>
@@ -177,6 +175,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="cg7-Sh-E93">
                         <rect key="frame" x="0.0" y="44" width="390" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4G8-fj-XSt">
@@ -191,6 +192,7 @@
             <point key="canvasLocation" x="-191" y="79"/>
         </scene>
     </scenes>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.void" width="21.333333969116211" height="21.333333969116211"/>

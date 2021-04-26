@@ -10,6 +10,8 @@ https://platform.seatgeek.com/#events
 
 This app is written in Swift (UIKit)
 
+The device orientation is set to be protrait only
+
 There are three main controllers.
 1. NavigationController (MainVC). It is mostly empty
 2. TableViewController (TVC). 
@@ -27,7 +29,7 @@ We also have a UISearchController in code embedded in TableViewController (TVC),
     I also use Realm studio to actually look at the database itself.
     
 **NOTE:** I use cocoapods for third-party libraries. Therefore, you would see podfile and xcworkspace file. It would also take
-longer to compile for the first time.
+longer to compile for the first time. If you want to see behind the scene what the database actually looks like, run the app and in the Xcode console, you will find the directory. Copy paste it and do ```open FILEPATH``` in the terminal, and viola! It will activate the realm studio. 
 
 ## Animation
 
@@ -42,7 +44,7 @@ Minimum Deployment Target : iOS 12.1 (By implementing  @available(iOS 13.0, *) t
 
 ## Branches
 
-Main:           The branch that I'm currently working on. 
+Main:           The branch that I'm currently working on and making changes. 
 
 Production: Fully runnable and up to requirement
 
@@ -50,8 +52,7 @@ Production: Fully runnable and up to requirement
 
 ## How to run
 
-Simpily clone the repo from Github. All the pods should be there. Run the **xcworkspace** instead of **xcproj** since I'm using Cocoapods. 
-
+Simpily clone the repo from Github. All the pods should be there. Run the **xcworkspace** instead of **xcproj**. 
 
 ## Current Issues
 
